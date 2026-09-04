@@ -1,0 +1,19 @@
+{
+  "name": "furback-org",
+  "version": "1.0.0",
+  "description": "Furback Org website and backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "stripe": "^22.6.1"
+  }
+}

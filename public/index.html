@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Furback Org</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #070b0a;
+    color: #f5fffc;
+    line-height: 1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 10px 6%;
+
+    background: rgba(7, 11, 10, 0.88);
+    backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(0, 207, 159, 0.12);
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #00cf9f;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #8d9a96;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-account-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-login {
+    padding: 10px 17px;
+
+    color: #06100c !important;
+    background: #00cf9f;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.nav-login:hover {
+    background: #22e0b2;
+}
+
+/* =========================
+   SUBSCRIPTION TOGGLE
+========================= */
+
+.subscription-toggle {
+    display: none;
+
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    border: 1px solid rgba(0, 207, 159, 0.3);
+    border-radius: 8px;
+
+    background: rgba(0, 207, 159, 0.07);
+    color: #00cf9f;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    white-space: nowrap;
+}
+
+.subscription-toggle:hover {
+    background: rgba(0, 207, 159, 0.14);
+    border-color: #00cf9f;
+}
+
+.subscription-toggle:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+.subscription-toggle.paused {
+    color: #ffb347;
+    border-color: rgba(255, 179, 71, 0.35);
+    background: rgba(255, 179, 71, 0.07);
+}
+
+.subscription-toggle.paused:hover {
+    background: rgba(255, 179, 71, 0.14);
+    border-color: #ffb347;
+}
+
+.subscription-dot {
+    font-size: 10px;
+}
+
+.subscription-owed {
+    display: none;
+
+    margin-left: 4px;
+
+    color: #ffb347;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 720px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 70px;
+
+    padding: 100px 8%;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+    height: 550px;
+
+    background: #00cf9f;
+
+    opacity: 0.07;
+
+    filter: blur(140px);
+
+    border-radius: 50%;
+
+    top: 50px;
+    left: -200px;
+
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #00cf9f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 24px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    background: #00cf9f;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 12px #00cf9f;
+}
+
+.hero h1 {
+    font-size: clamp(55px, 8vw, 105px);
+
+    line-height: 0.94;
+
+    letter-spacing: -6px;
+
+    margin-bottom: 30px;
+}
+
+.hero h1 .accent {
+    color: #00cf9f;
+}
+
+.hero h1 .muted {
+    color: #69736f;
+}
+
+.hero-description {
+    color: #899590;
+
+    max-width: 520px;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 22px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.button-primary {
+    background: #00cf9f;
+    color: #06100c;
+
+    box-shadow: 0 0 30px rgba(0, 207, 159, 0.12);
+}
+
+.button-primary:hover {
+    transform: translateY(-2px);
+    background: #22e0b2;
+    box-shadow: 0 0 35px rgba(0, 207, 159, 0.25);
+}
+
+.button-secondary {
+    color: #ffffff;
+
+    background: #101613;
+
+    border: 1px solid #26322e;
+}
+
+.button-secondary:hover {
+    transform: translateY(-2px);
+    border-color: #00cf9f;
+}
+
+/* =========================
+   LAUNCHER PREVIEW
+========================= */
+
+.launcher {
+    width: 430px;
+    max-width: 100%;
+
+    background: #0c1210;
+
+    border: 1px solid #26332f;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.55),
+        0 0 60px rgba(0, 207, 159, 0.05);
+
+    position: relative;
+    z-index: 2;
+}
+
+.launcher-top {
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid #202b27;
+
+    color: #8d9995;
+
+    font-size: 13px;
+}
+
+.launcher-title {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.launcher-ready {
+    color: #00cf9f;
+}
+
+.launcher-body {
+    padding: 22px;
+}
+
+.launcher-label {
+    color: #65716d;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+.launcher-game {
+    padding: 18px;
+
+    background: #101714;
+
+    border: 1px solid #26332f;
+
+    border-radius: 10px;
+
+    margin-bottom: 12px;
+}
+
+.launcher-game strong {
+    display: block;
+
+    color: #ffffff;
+
+    margin-bottom: 4px;
+}
+
+.launcher-game span {
+    color: #77847f;
+
+    font-size: 13px;
+}
+
+.launcher-status {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 16px;
+
+    background: #101714;
+
+    border: 1px solid #26332f;
+
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+}
+
+.launcher-status span {
+    color: #7d8985;
+}
+
+.launcher-status strong {
+    color: #00cf9f;
+}
+
+.launcher-button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #00cf9f;
+    color: #06100c;
+
+    font-weight: 800;
+
+    cursor: default;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    border-top: 1px solid #1d2724;
+    border-bottom: 1px solid #1d2724;
+}
+
+.stat {
+    padding: 35px;
+
+    text-align: center;
+
+    border-right: 1px solid #1d2724;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat h2 {
+    color: #00cf9f;
+
+    font-size: 28px;
+
+    margin-bottom: 4px;
+}
+
+.stat p {
+    color: #697570;
+
+    font-size: 13px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    padding: 110px 8%;
+}
+
+.section-header {
+    max-width: 650px;
+
+    margin-bottom: 55px;
+}
+
+.section-label {
+    color: #00cf9f;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    font-size: 46px;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 18px;
+}
+
+.section-header p {
+    color: #7e8985;
+
+    line-height: 1.7;
+}
+
+/* =========================
+   PLAN
+========================= */
+
+.plans {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.plan {
+    padding: 30px;
+
+    background: #0b110f;
+
+    border: 1px solid #222e2a;
+
+    border-radius: 13px;
+
+    transition: 0.25s;
+}
+
+.plan:hover {
+    transform: translateY(-5px);
+
+    border-color: #00cf9f;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.plan.featured {
+    border-color: rgba(0, 207, 159, 0.55);
+}
+
+.plan-tag {
+    display: inline-block;
+
+    color: #00cf9f;
+
+    background: rgba(0, 207, 159, 0.08);
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+.plan h3 {
+    font-size: 24px;
+
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+}
+
+.price span {
+    color: #66716d;
+
+    font-size: 13px;
+
+    font-weight: normal;
+}
+
+.plan ul {
+    list-style: none;
+
+    margin-bottom: 25px;
+}
+
+.plan li {
+    color: #7e8985;
+
+    font-size: 14px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid #18211e;
+}
+
+.plan li::before {
+    content: "✓";
+
+    color: #00cf9f;
+
+    margin-right: 9px;
+}
+
+.plan-button {
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #101714;
+
+    border: 1px solid #29352f;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: default;
+}
+
+.plan-button.disabled {
+    color: #56615d;
+
+    cursor: not-allowed;
+}
+
+/* =========================
+   PAUSED PREMIUM STATE
+========================= */
+
+.premium-locked {
+    opacity: 0.55;
+    filter: grayscale(0.25);
+    pointer-events: none;
+}
+
+.paused-message {
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(255, 179, 71, 0.3);
+    border-radius: 9px;
+
+    background: rgba(255, 179, 71, 0.06);
+
+    color: #ffb347;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================
+   MOD LOADER
+========================= */
+
+.loader-section {
+    background: #090e0c;
+}
+
+.loader-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 207, 159, 0.07),
+            rgba(0, 0, 0, 0)
+        );
+
+    border: 1px solid #25332e;
+
+    border-radius: 15px;
+}
+
+.loader-info {
+    max-width: 650px;
+}
+
+.loader-info h3 {
+    font-size: 32px;
+
+    margin-bottom: 12px;
+}
+
+.loader-info p {
+    color: #7e8985;
+}
+
+.locked {
+    min-width: 210px;
+
+    padding: 15px 22px;
+
+    text-align: center;
+
+    color: #56615d;
+
+    background: #101512;
+
+    border: 1px solid #29332f;
+
+    border-radius: 9px;
+
+    font-weight: 800;
+
+    cursor: not-allowed;
+}
+
+/* =========================
+   UPDATES
+========================= */
+
+.updates {
+    display: grid;
+
+    gap: 12px;
+}
+
+.update {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 20px 23px;
+
+    background: #0b110f;
+
+    border: 1px solid #202b27;
+
+    border-radius: 10px;
+}
+
+.update-info h3 {
+    font-size: 16px;
+
+    margin-bottom: 3px;
+}
+
+.update-info p {
+    color: #68736f;
+
+    font-size: 13px;
+}
+
+.update-date {
+    color: #00cf9f;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   DISCORD
+========================= */
+
+.discord {
+    text-align: center;
+
+    padding: 100px 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 207, 159, 0.08),
+            transparent 60%
+        );
+}
+
+.discord h2 {
+    font-size: 45px;
+
+    margin-bottom: 12px;
+}
+
+.discord p {
+    color: #77827e;
+
+    max-width: 500px;
+
+    margin: 0 auto 30px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 30px 8%;
+
+    border-top: 1px solid #1d2724;
+
+    color: #5d6864;
+
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media screen and (max-width: 1100px) {
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .subscription-toggle {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .navbar {
+        padding: 10px 4%;
+    }
+
+    .hero {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding-top: 80px;
+    }
+
+    .launcher {
+        width: 100%;
+    }
+
+    .plans {
+        grid-template-columns: 1fr;
+    }
+
+    .loader-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .locked {
+        width: 100%;
+    }
+
+    /*
+       DO NOT hide the subscription toggle here.
+       If the logged-in user is eligible, it should
+       still appear on mobile.
+    */
+}
+
+@media screen and (max-width: 600px) {
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        border-right: none;
+
+        border-bottom: 1px solid #1d2724;
+    }
+
+    .stat:last-child {
+        border-bottom: none;
+    }
+
+    .section {
+        padding: 75px 6%;
+    }
+
+    .section-header h2 {
+        font-size: 36px;
+    }
+
+    .update {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .subscription-toggle {
+        padding: 8px 10px;
+    }
+
+    .subscription-owed {
+        display: none !important;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+<div class="logo">
+    Furback<span>Org</span>
+</div>
+
+<div class="nav-links">
+
+    <a href="#home">Home</a>
+    <a href="#plan">Plan</a>
+    <a href="#loader">Mod Loader</a>
+    <a href="#updates">Updates</a>
+    <a href="#discord">Discord</a>
+
+</div>
+
+<div class="nav-account-actions">
+
+    <!-- Subscription toggle -->
+    <button
+        id="subscriptionToggle"
+        class="subscription-toggle"
+        type="button"
+        style="display:none;"
+    >
+        <span id="subscriptionDot" class="subscription-dot">●</span>
+        <span id="subscriptionText">Subscription Active</span>
+        <span id="subscriptionOwed" class="subscription-owed"></span>
+    </button>
+
+    <a
+        href="#dashboard"
+        class="nav-login"
+        id="navLogin"
+    >
+        Login with Discord
+    </a>
+
+</div>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+    <div class="status">
+        <span class="status-dot"></span>
+        FURBACK ORG ONLINE
+    </div>
+
+    <h1>
+        Mods.<br>
+        <span class="accent">Tools.</span><br>
+        <span class="muted">Utilities.</span>
+    </h1>
+
+    <p class="hero-description">
+        Welcome to Furback Org — a place for Furback mods,
+        tools, utilities, and everything else created by PipVR.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a
+            href="#download"
+            class="button button-primary"
+        >
+            Download Free DLL
+        </a>
+
+        <a
+            href="#dashboard"
+            class="button button-secondary"
+            id="heroLogin"
+        >
+            Login with Discord
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Launcher preview -->
+
+<div class="launcher">
+
+    <div class="launcher-top">
+
+        <span class="launcher-title">
+            Furback Launcher
+        </span>
+
+        <span class="launcher-ready">
+            ● Ready
+        </span>
+
+    </div>
+
+    <div class="launcher-body">
+
+        <div class="launcher-label">
+            Game
+        </div>
+
+        <div class="launcher-game">
+
+            <strong>
+                Gorilla Tag
+            </strong>
+
+            <span>
+                Waiting for game...
+            </span>
+
+        </div>
+
+        <div class="launcher-status">
+
+            <span>
+                License
+            </span>
+
+            <strong id="launcherLicense">
+                Free
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="stats">
+
+<div class="stat">
+    <h2>FREE/FAST</h2>
+    <p>The free DLL downloads <br>ad-free (unlike TUP)</p>
+</div>
+
+<div class="stat">
+    <h2>PAID version</h2>
+    <p>There is a PAID Version too!<br>Pay to unlock more!</p>
+</div>
+
+<div class="stat">
+    <h2>24/7</h2>
+    <p>Forever Website availability<br>Will get updated still</p>
+</div>
+
+</section>
+
+<!-- =========================
+     PLAN
+========================= -->
+
+<section class="section" id="plan">
+
+<div class="section-header">
+
+    <div class="section-label">
+        Plans
+    </div>
+
+    <h2>
+        Pick your plan.
+    </h2>
+
+    <p>
+        Start with the free version or upgrade to
+        Furback premium when subscriptions become available.
+    </p>
+
+</div>
+
+
+<div class="plans">
+
+    <div class="plan">
+
+        <div class="plan-tag">
+            Free
+        </div>
+
+        <h3>
+            Free
+        </h3>
+
+        <div class="price">
+            $0
+            <span>/ forever</span>
+        </div>
+
+        <ul>
+            <li>Free DLL download</li>
+            <li>Basic Furback access</li>
+            <li>Community support</li>
+        </ul>
+
+        <a
+            href="#download"
+            class="button button-primary"
+            style="width:100%;"
+        >
+            Get Free DLL
+        </a>
+
+    </div>
+
+
+    <div
+        class="plan featured"
+        id="furbackPlusPlan"
+    >
+
+        <div class="plan-tag">
+            Coming Soon
+        </div>
+
+        <h3>
+            Furback+
+        </h3>
+
+        <div class="price">
+            $5 <span>/ Month</span>
+        </div>
+
+        <ul>
+            <li>Mod Loader</li>
+            <li>Basic Premium features</li>
+            <li>Advanced dashboard</li>
+            <li>Subscriber downloads</li>
+        </ul>
+
+        <button class="plan-button disabled">
+            Coming Soon
+        </button>
+
+    </div>
+
+
+    <div
+        class="plan"
+        id="ultimatePlan"
+    >
+
+        <div class="plan-tag">
+            Coming Soon
+        </div>
+
+        <h3>
+            Ultimate
+        </h3>
+
+        <div class="price">
+            $10 <span>/ Month</span>
+        </div>
+
+        <ul>
+            <li>Everything in Furback+</li>
+            <li>Full premium features</li>
+            <li>More!</li>
+        </ul>
+
+        <button class="plan-button disabled">
+            Coming Soon
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     MOD LOADER
+========================= -->
+
+<section class="section loader-section" id="loader">
+
+<div class="section-header">
+
+    <div class="section-label">
+        Mod Loader
+    </div>
+
+    <h2>
+        One launcher.<br>
+        All your mods.
+    </h2>
+
+    <p>
+        The Furback Mod Loader is planned as an easy way
+        to manage and launch your Furback mods.
+    </p>
+
+</div>
+
+
+<div
+    class="loader-card"
+    id="premiumLoaderCard"
+>
+
+    <div class="loader-info">
+
+        <h3>
+            Furback Mod Loader
+        </h3>
+
+        <p id="loaderDescription">
+            The installer will be available to users with
+            an active FB subscription.
+        </p>
+
+        <div
+            id="loaderPausedMessage"
+            class="paused-message"
+        >
+            ⏸️ Subscription Paused — premium features are currently locked.
+        </div>
+
+    </div>
+
+    <div
+        id="loaderLocked"
+        class="locked"
+    >
+        🔒 Coming Soon
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     DOWNLOAD
+========================= -->
+
+<section class="section" id="download">
+
+<div class="section-header">
+
+    <h2>
+        Get Furback Menu.
+    </h2>
+
+    <p>
+        The free DLL is available to everyone.
+        Premium downloads will require an active subscription.
+    </p>
+
+</div>
+
+<div class="loader-card">
+
+    <div class="loader-info">
+
+        <h3>
+            Furback Menu Download
+        </h3>
+
+        <p>
+            Download the current free version of the
+            Furback mod menu. A bit broken
+            but at least your not paying for a broken menu
+        </p>
+
+    </div>
+
+    <a
+        href="downloads/FurbackMenuREBORN.dll"
+        download
+        class="button button-primary"
+    >
+        Download Furback Menu
+    </a>
+
+</div>
+
+</section>
+
+<!-- =========================
+     UPDATES
+========================= -->
+
+<section class="section" id="updates">
+
+<div class="section-header">
+
+    <div class="section-label">
+        Updates
+    </div>
+
+    <h2>
+        What's new?
+    </h2>
+
+    <p>
+        Keep up with the latest Furback Org updates.
+    </p>
+
+</div>
+
+
+<div class="updates">
+
+    <div class="update">
+
+        <div class="update-info">
+
+            <h3>
+                Furback Org website launched
+            </h3>
+
+            <p>
+                The new Furback Org website is now online, With some html cleanup :)
+            </p>
+
+        </div>
+
+        <div class="update-date">
+            NEW
+        </div>
+
+    </div>
+
+    <div class="update">
+
+        <div class="update-info">
+
+            <h3>
+                More mods coming
+            </h3>
+
+            <p>
+                More Furback projects and utilities are in development.
+            </p>
+
+        </div>
+
+        <div class="update-date">
+            SOON
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     DISCORD
+========================= -->
+
+<section class="discord" id="discord">
+
+<h2>
+    Join the community.
+</h2>
+
+<p>
+    Join the Furback Discord to get updates,
+    announcements, and information about new releases.
+</p>
+
+<a
+    href="https://discord.gg/tH9we3UCMY"
+    target="_blank"
+    class="button button-primary"
+>
+    Join Discord
+</a>
+
+</section>
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section class="section" id="dashboard">
+
+<div class="section-header">
+
+    <div class="section-label">
+        Dashboard
+    </div>
+
+    <h2>
+        Your Furback account.
+    </h2>
+
+    <p id="dashboardDescription">
+        Discord login and the account dashboard will be
+        added in a future update.
+    </p>
+
+</div>
+
+
+<div class="loader-card">
+
+    <div class="loader-info">
+
+        <h3 id="dashboardTitle">
+            Login with Discord
+        </h3>
+
+        <p id="dashboardStatus">
+            Sign in with your Discord account to access
+            your account, subscription status, and
+            subscriber-only downloads.
+        </p>
+
+    </div>
+
+    <button
+        class="locked"
+        id="dashboardButton"
+    >
+        Login Now
+    </button>
+
+</div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+<div>
+    © 2026 <strong>FurbackOrg</strong>
+</div>
+
+<div>
+    Created by <strong>PipPlaysVr</strong>
+</div>
+
+</footer>
+
+<!-- ========================
+     ACCOUNT + SUBSCRIPTION
+========================= -->
+
+<script>
+
+/*
+    ============================================
+    FURBACK ORG OWNER EASTER EGG
+    ============================================
+
+    This is intentionally NOT a security check.
+
+    Changing this value does NOT give anyone
+    owner permissions.
+
+    Actual owner permissions are determined
+    by the server.
+*/
+
+const owner = "PipPlaysVrOfficial";
+
+if (owner === "PipPlaysVrOfficial") {
+    console.log("Furback Org owner detected 👀");
+}
+
+
+/*
+    ============================================
+    ACCOUNT STATE
+    ============================================
+*/
+
+let subscriptionState = {
+
+    loggedIn: false,
+
+    username: null,
+
+    owner: false,
+
+    plan: "free",
+
+    billingType: null,
+
+    subscriptionStatus: null,
+
+    subscriptionPaused: false,
+
+    amountOwedCents: 0,
+
+    lifetime: false,
+
+    hasPremium: false
+};
+
+
+/*
+    ============================================
+    ELEMENTS
+    ============================================
+*/
+
+const subscriptionToggle =
+    document.getElementById("subscriptionToggle");
+
+const subscriptionText =
+    document.getElementById("subscriptionText");
+
+const subscriptionDot =
+    document.getElementById("subscriptionDot");
+
+const subscriptionOwed =
+    document.getElementById("subscriptionOwed");
+
+const navLogin =
+    document.getElementById("navLogin");
+
+const heroLogin =
+    document.getElementById("heroLogin");
+
+const loaderLocked =
+    document.getElementById("loaderLocked");
+
+const loaderDescription =
+    document.getElementById("loaderDescription");
+
+const loaderPausedMessage =
+    document.getElementById("loaderPausedMessage");
+
+const premiumLoaderCard =
+    document.getElementById("premiumLoaderCard");
+
+const launcherLicense =
+    document.getElementById("launcherLicense");
+
+const dashboardTitle =
+    document.getElementById("dashboardTitle");
+
+const dashboardStatus =
+    document.getElementById("dashboardStatus");
+
+const dashboardDescription =
+    document.getElementById("dashboardDescription");
+
+const dashboardButton =
+    document.getElementById("dashboardButton");
+
+
+/*
+    ============================================
+    FORMAT MONEY
+    ============================================
+*/
+
+function formatMoney(cents) {
+
+    const dollars =
+        Number(cents || 0) / 100;
+
+    return "$" + dollars.toFixed(2);
+}
+
+
+/*
+    ============================================
+    CHECK IF USER CAN USE TOGGLE
+    ============================================
+*/
+
+function canUseSubscriptionToggle() {
+
+    const state =
+        subscriptionState;
+
+
+    /*
+        OWNER
+
+        The server decides who the owner is.
+        This allows the owner to test pause/resume.
+    */
+
+    if (state.owner) {
+        return true;
+    }
+
+
+    /*
+        LIFETIME
+
+        Lifetime accounts don't need
+        subscription pausing.
+    */
+
+    if (state.lifetime) {
+        return false;
+    }
+
+
+    /*
+        MONTHLY PREMIUM
+
+        Only active/trialing monthly
+        Furback+ or Ultimate accounts.
+    */
+
+    const isMonthlySubscriber =
+        state.billingType === "monthly" &&
+        (
+            state.plan === "furback+" ||
+            state.plan === "ultimate"
+        ) &&
+        (
+            state.subscriptionStatus === "active" ||
+            state.subscriptionStatus === "trialing"
+        );
+
+
+    return (
+        state.loggedIn &&
+        isMonthlySubscriber
+    );
+}
+
+
+/*
+    ============================================
+    UPDATE LOGIN UI
+    ============================================
+*/
+
+function updateLoginUI() {
+
+    /*
+        NAVBAR LOGIN
+
+        If logged in, remove the Login
+        with Discord button.
+    */
+
+    if (navLogin) {
+
+        navLogin.style.display =
+            subscriptionState.loggedIn
+                ? "none"
+                : "";
+    }
+
+
+    /*
+        HERO LOGIN
+
+        Also hide the hero Login with Discord
+        button when logged in.
+    */
+
+    if (heroLogin) {
+
+        heroLogin.style.display =
+            subscriptionState.loggedIn
+                ? "none"
+                : "";
+    }
+}
+
+
+/*
+    ============================================
+    UPDATE DASHBOARD
+    ============================================
+*/
+
+function updateDashboardUI() {
+
+    if (!dashboardTitle ||
+        !dashboardStatus ||
+        !dashboardDescription) {
+
+        return;
+    }
+
+
+    /*
+        LOGGED OUT
+    */
+
+    if (!subscriptionState.loggedIn) {
+
+        dashboardTitle.textContent =
+            "Login with Discord";
+
+        dashboardStatus.textContent =
+            "Sign in with your Discord account to access your account, subscription status, and subscriber-only downloads.";
+
+        dashboardDescription.textContent =
+            "Discord login and the account dashboard will be added in a future update.";
+
+        if (dashboardButton) {
+            dashboardButton.textContent =
+                "Login Now";
+        }
+
+        return;
+    }
+
+
+    /*
+        LOGGED IN
+    */
+
+    const username =
+        subscriptionState.username ||
+        "Furback User";
+
+
+    if (subscriptionState.subscriptionPaused) {
+
+        dashboardTitle.textContent =
+            "Subscription Paused";
+
+        dashboardStatus.textContent =
+            `${username}, your premium features are currently locked. Resume your subscription to restore premium access.`;
+
+        dashboardDescription.textContent =
+            "Your account is currently signed in, but premium access is paused.";
+
+        if (dashboardButton) {
+            dashboardButton.textContent =
+                "Subscription Paused";
+        }
+
+    }
+
+    else {
+
+        dashboardTitle.textContent =
+            username;
+
+        dashboardStatus.textContent =
+            "Your Furback account is signed in and your account status is active.";
+
+        dashboardDescription.textContent =
+            "You are currently signed in to your Furback account.";
+
+        if (dashboardButton) {
+
+            if (subscriptionState.owner) {
+
+                dashboardButton.textContent =
+                    "Owner";
+
+            }
+
+            else if (subscriptionState.lifetime) {
+
+                dashboardButton.textContent =
+                    "Lifetime";
+
+            }
+
+            else if (subscriptionState.hasPremium) {
+
+                dashboardButton.textContent =
+                    "Premium";
+
+            }
+
+            else {
+
+                dashboardButton.textContent =
+                    "Free";
+            }
+        }
+    }
+}
+
+
+/*
+    ============================================
+    UPDATE SUBSCRIPTION UI
+    ============================================
+*/
+
+function updateSubscriptionUI() {
+
+    const state =
+        subscriptionState;
+
+
+    /*
+        Determine whether toggle should exist.
+    */
+
+    const canUseToggle =
+        canUseSubscriptionToggle();
+
+
+    if (!canUseToggle) {
+
+        subscriptionToggle.style.display =
+            "none";
+
+    }
+
+    else {
+
+        subscriptionToggle.style.display =
+            "inline-flex";
+    }
+
+
+    /*
+        ========================================
+        PAUSED
+        ========================================
+    */
+
+    if (state.subscriptionPaused) {
+
+        subscriptionToggle.classList.add(
+            "paused"
+        );
+
+        subscriptionDot.textContent =
+            "●";
+
+        subscriptionText.textContent =
+            "Subscription Paused";
+
+
+        /*
+            Amount owed
+        */
+
+        if (state.amountOwedCents > 0) {
+
+            subscriptionOwed.style.display =
+                "inline";
+
+            subscriptionOwed.textContent =
+                "Owed " +
+                formatMoney(
+                    state.amountOwedCents
+                );
+
+        }
+
+        else {
+
+            subscriptionOwed.style.display =
+                "none";
+        }
+
+
+        /*
+            Lock Mod Loader
+        */
+
+        premiumLoaderCard.classList.add(
+            "premium-locked"
+        );
+
+        loaderPausedMessage.style.display =
+            "block";
+
+        loaderLocked.textContent =
+            "⏸️ Subscription Paused";
+
+        loaderDescription.textContent =
+            "Premium features are disabled while your subscription is paused.";
+    }
+
+
+    /*
+        ========================================
+        ACTIVE
+        ========================================
+    */
+
+    else {
+
+        subscriptionToggle.classList.remove(
+            "paused"
+        );
+
+        subscriptionDot.textContent =
+            "●";
+
+        subscriptionText.textContent =
+            "Subscription Active";
+
+        subscriptionOwed.style.display =
+            "none";
+
+
+        /*
+            Unlock Mod Loader
+        */
+
+        premiumLoaderCard.classList.remove(
+            "premium-locked"
+        );
+
+        loaderPausedMessage.style.display =
+            "none";
+
+        loaderLocked.textContent =
+            "🔒 Coming Soon";
+
+        loaderDescription.textContent =
+            "The installer will be available to users with an active FB subscription.";
+    }
+
+
+    /*
+        ========================================
+        LAUNCHER LICENSE
+        ========================================
+    */
+
+    if (state.owner) {
+
+        launcherLicense.textContent =
+            state.subscriptionPaused
+                ? "Owner • Paused"
+                : "Owner";
+    }
+
+    else if (state.lifetime) {
+
+        launcherLicense.textContent =
+            "Lifetime";
+    }
+
+    else if (state.hasPremium) {
+
+        launcherLicense.textContent =
+            state.subscriptionPaused
+                ? "Paused"
+                : "Premium";
+    }
+
+    else {
+
+        launcherLicense.textContent =
+            "Free";
+    }
+
+
+    /*
+        ========================================
+        DASHBOARD
+        ========================================
+    */
+
+    updateDashboardUI();
+}
+
+
+/*
+    ============================================
+    LOAD ACCOUNT FROM SERVER
+    ============================================
+*/
+
+async function loadSubscriptionState() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/me",
+                {
+                    method: "GET",
+
+                    credentials: "include",
+
+                    cache: "no-store"
+                }
+            );
+
+
+        /*
+            NOT LOGGED IN
+
+            This is normal.
+
+            Keep Login with Discord visible.
+        */
+
+        if (!response.ok) {
+
+            subscriptionState = {
+
+                loggedIn: false,
+
+                username: null,
+
+                owner: false,
+
+                plan: "free",
+
+                billingType: null,
+
+                subscriptionStatus: null,
+
+                subscriptionPaused: false,
+
+                amountOwedCents: 0,
+
+                lifetime: false,
+
+                hasPremium: false
+            };
+
+
+            updateLoginUI();
+
+            updateDashboardUI();
+
+            subscriptionToggle.style.display =
+                "none";
+
+            launcherLicense.textContent =
+                "Free";
+
+            return;
+        }
+
+
+        /*
+            Parse server response.
+        */
+
+        const data =
+            await response.json();
+
+
+        /*
+            Support:
+
+                {
+                    user: {...}
+                }
+
+            AND:
+
+                {
+                    username: "...",
+                    plan: "..."
+                }
+        */
+
+        const user =
+            data.user || data;
+
+
+        subscriptionState = {
+
+            loggedIn:
+                data.loggedIn !== undefined
+                    ? Boolean(data.loggedIn)
+                    : true,
+
+
+            username:
+                data.username ??
+                user.username ??
+                null,
+
+
+            /*
+                IMPORTANT:
+
+                This MUST come from the server.
+
+                The frontend "owner" constant above
+                is not used for permissions.
+            */
+
+            owner:
+                Boolean(
+                    data.owner ??
+                    user.owner ??
+                    false
+                ),
+
+
+            plan:
+                String(
+                    data.plan ??
+                    user.plan ??
+                    "free"
+                ).toLowerCase(),
+
+
+            billingType:
+                data.billingType ??
+                user.billingType ??
+                null,
+
+
+            subscriptionStatus:
+                data.subscriptionStatus ??
+                user.subscriptionStatus ??
+                null,
+
+
+            subscriptionPaused:
+                Boolean(
+                    data.subscriptionPaused ??
+                    user.subscriptionPaused ??
+                    false
+                ),
+
+
+            amountOwedCents:
+                Number(
+                    data.amountOwedCents ??
+                    user.amountOwedCents ??
+                    0
+                ),
+
+
+            lifetime:
+                Boolean(
+                    data.lifetime ??
+                    user.lifetime ??
+                    false
+                ),
+
+
+            hasPremium:
+                Boolean(
+                    data.hasPremium ??
+                    user.hasPremium ??
+                    false
+                )
+        };
+
+
+        console.log(
+            "Furback account loaded:",
+            {
+                username:
+                    subscriptionState.username,
+
+                plan:
+                    subscriptionState.plan,
+
+                billingType:
+                    subscriptionState.billingType,
+
+                paused:
+                    subscriptionState.subscriptionPaused,
+
+                premium:
+                    subscriptionState.hasPremium,
+
+                owner:
+                    subscriptionState.owner
+            }
+        );
+
+
+        /*
+            Update everything.
+        */
+
+        updateLoginUI();
+
+        updateSubscriptionUI();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Failed to load Furback account:",
+            error
+        );
+
+
+        /*
+            Fail closed.
+
+            If the server can't be reached,
+            don't give the browser premium access.
+        */
+
+        subscriptionState.loggedIn =
+            false;
+
+        subscriptionState.owner =
+            false;
+
+        subscriptionState.hasPremium =
+            false;
+
+        subscriptionState.subscriptionPaused =
+            false;
+
+        updateLoginUI();
+
+        updateDashboardUI();
+
+        subscriptionToggle.style.display =
+            "none";
+
+        launcherLicense.textContent =
+            "Free";
+    }
+}
+
+
+/*
+    ============================================
+    PAUSE / RESUME
+    ============================================
+*/
+
+async function changeSubscriptionState() {
+
+    /*
+        Must actually be logged in.
+    */
+
+    if (!subscriptionState.loggedIn) {
+
+        alert(
+            "You must be logged in to manage your subscription."
+        );
+
+        return;
+    }
+
+
+    /*
+        Determine action.
+    */
+
+    const shouldPause =
+        !subscriptionState.subscriptionPaused;
+
+
+    const endpoint =
+        shouldPause
+            ? "/api/subscription/pause"
+            : "/api/subscription/resume";
+
+
+    /*
+        Disable button while request is running.
+    */
+
+    subscriptionToggle.disabled =
+        true;
+
+
+    const oldText =
+        subscriptionText.textContent;
+
+
+    subscriptionText.textContent =
+        shouldPause
+            ? "Pausing..."
+            : "Resuming...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                endpoint,
+                {
+                    method: "POST",
+
+                    credentials: "include",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        let data = {};
+
+
+        try {
+
+            data =
+                await response.json();
+
+        }
+
+        catch {
+
+            data = {};
+        }
+
+
+        /*
+            Server rejected request.
+        */
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "The server rejected the request."
+            );
+        }
+
+
+        /*
+            IMPORTANT:
+
+            Don't just change the browser state.
+
+            Ask the server again.
+        */
+
+        await loadSubscriptionState();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Subscription change failed:",
+            error
+        );
+
+
+        subscriptionText.textContent =
+            oldText;
+
+
+        alert(
+            "Could not change subscription status:\n\n" +
+            error.message
+        );
+    }
+
+
+    subscriptionToggle.disabled =
+        false;
+}
+
+
+/*
+    ============================================
+    TOGGLE CLICK
+    ============================================
+*/
+
+subscriptionToggle.addEventListener(
+    "click",
+    changeSubscriptionState
+);
+
+
+/*
+    ============================================
+    INITIAL ACCOUNT CHECK
+    ============================================
+*/
+
+loadSubscriptionState();
+
+</script>
+
+</body>
+</html>

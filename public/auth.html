@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Furback Org — Account</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #070b0a;
+    color: #f5fffc;
+
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    background: #00cf9f;
+
+    opacity: 0.07;
+
+    filter: blur(150px);
+
+    border-radius: 50%;
+
+    top: -250px;
+    left: -200px;
+
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    background: #00cf9f;
+
+    opacity: 0.04;
+
+    filter: blur(140px);
+
+    border-radius: 50%;
+
+    bottom: -250px;
+    right: -150px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 440px;
+    max-width: calc(100% - 30px);
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #00cf9f;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: rgba(12, 18, 16, 0.94);
+
+    border: 1px solid #26332f;
+
+    border-radius: 15px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.55),
+        0 0 60px rgba(0, 207, 159, 0.04);
+
+    backdrop-filter: blur(15px);
+}
+
+.card h1 {
+    font-size: 29px;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #77847f;
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 5px;
+
+    padding: 5px;
+
+    background: #080d0b;
+
+    border: 1px solid #202b27;
+
+    border-radius: 9px;
+
+    margin-bottom: 25px;
+}
+
+.tab {
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #66726d;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.tab.active {
+    background: #15211d;
+
+    color: #ffffff;
+}
+
+.tab:hover {
+    color: #ffffff;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+
+/* =========================
+   FIELDS
+========================= */
+
+.field {
+    margin-bottom: 17px;
+}
+
+.field label {
+    display: block;
+
+    color: #9aa6a2;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+.field input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border-radius: 8px;
+
+    border: 1px solid #28332f;
+
+    outline: none;
+
+    background: #090e0c;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.field input:focus {
+    border-color: #00cf9f;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 207, 159, 0.08);
+}
+
+.field input::placeholder {
+    color: #46514d;
+}
+
+
+/* =========================
+   PASSWORD REQUIREMENTS
+========================= */
+
+.requirements {
+    padding: 12px 14px;
+
+    background: #0a100e;
+
+    border: 1px solid #1f2a26;
+
+    border-radius: 8px;
+
+    margin-top: -5px;
+
+    margin-bottom: 18px;
+
+    color: #65716d;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.requirements strong {
+    color: #00cf9f;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.submit {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #00cf9f;
+
+    color: #06100c;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.submit:hover {
+    background: #22e0b2;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 207, 159, 0.15);
+}
+
+.submit:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 23px 0;
+
+    color: #4d5955;
+
+    font-size: 11px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: #202a26;
+}
+
+
+/* =========================
+   DISCORD
+========================= */
+
+.discord {
+    width: 100%;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    background: #111816;
+
+    border: 1px solid #29352f;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.discord:hover {
+    border-color: #00cf9f;
+
+    background: #131d1a;
+}
+
+.discord:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #65716d;
+
+    font-size: 12px;
+
+    text-decoration: none;
+}
+
+.back:hover {
+    color: #00cf9f;
+}
+
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice {
+    margin-top: 18px;
+
+    padding: 11px;
+
+    border-radius: 8px;
+
+    background: rgba(0, 207, 159, 0.04);
+
+    border: 1px solid rgba(0, 207, 159, 0.12);
+
+    color: #65716d;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   STATUS MESSAGE
+========================= */
+
+.status {
+    display: none;
+
+    margin-bottom: 18px;
+
+    padding: 11px 13px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    text-align: center;
+}
+
+.status.show {
+    display: block;
+}
+
+.status.error {
+    background: rgba(255, 70, 70, 0.06);
+
+    border: 1px solid rgba(255, 70, 70, 0.2);
+
+    color: #ff8c8c;
+}
+
+.status.success {
+    background: rgba(0, 207, 159, 0.06);
+
+    border: 1px solid rgba(0, 207, 159, 0.18);
+
+    color: #58e6c0;
+}
+
+
+/* =========================
+   REMEMBERED ACCOUNT
+========================= */
+
+#welcomeScreen {
+    display: none;
+}
+
+#welcomeScreen.active {
+    display: block;
+}
+
+.welcome-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(0, 207, 159, 0.08);
+
+    border: 1px solid rgba(0, 207, 159, 0.2);
+
+    color: #00cf9f;
+
+    font-size: 25px;
+
+    font-weight: 900;
+}
+
+.welcome-text {
+    text-align: center;
+
+    color: #77847f;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 24px;
+}
+
+.remembered-name {
+    color: #ffffff;
+
+    font-weight: 800;
+}
+
+.continue-button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #00cf9f;
+
+    color: #06100c;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-bottom: 10px;
+}
+
+.continue-button:hover {
+    background: #22e0b2;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 207, 159, 0.15);
+}
+
+.continue-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+.secondary-button {
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #111816;
+
+    border: 1px solid #29352f;
+
+    color: #b5c0bc;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-bottom: 10px;
+}
+
+.secondary-button:hover {
+    border-color: #00cf9f;
+
+    color: #ffffff;
+}
+
+.forget-button {
+    display: block;
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: #53605b;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    padding: 7px;
+}
+
+.forget-button:hover {
+    color: #ff8c8c;
+}
+
+
+/* =========================
+   AUTH CONTENT
+========================= */
+
+#authContent {
+    display: block;
+}
+
+#authContent.hidden {
+    display: none;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+    text-align: center;
+
+    color: #65716d;
+
+    font-size: 12px;
+
+    padding: 10px 0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media screen and (max-width: 500px) {
+
+    .card {
+        padding: 25px;
+    }
+
+    .card h1 {
+        font-size: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        Furback<span>Org</span>
+    </div>
+
+
+    <div class="card">
+
+        <!-- =========================
+             REMEMBERED ACCOUNT
+        ========================= -->
+
+        <div id="welcomeScreen">
+
+            <div class="welcome-icon">
+                ✓
+            </div>
+
+            <h1 style="text-align:center;">
+                Welcome back.
+            </h1>
+
+            <p class="welcome-text">
+                We found a Furback User account remembered on
+                this device.
+                <br><br>
+                Continue as
+                <span
+                    id="rememberedUsername"
+                    class="remembered-name"
+                >
+                    User
+                </span>?
+            </p>
+
+            <div
+                id="rememberedStatus"
+                class="status"
+            ></div>
+
+            <button
+                id="continueButton"
+                class="continue-button"
+                onclick="continueAsRememberedUser()"
+            >
+                Continue
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="useDifferentAccount()"
+            >
+                Use a different account
+            </button>
+
+            <button
+                id="forgetButton"
+                class="forget-button"
+                onclick="forgetThisDevice()"
+            >
+                Remove this account from this device
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             NORMAL AUTH CONTENT
+        ========================= -->
+
+        <div id="authContent">
+
+            <h1>
+                Welcome back.
+            </h1>
+
+            <p class="subtitle">
+                Create or access your Furback User account.
+            </p>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+            <!-- =========================
+                 TABS
+            ========================= -->
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    id="loginTab"
+                    onclick="showLogin()"
+                    type="button"
+                >
+                    Login
+                </button>
+
+                <button
+                    class="tab"
+                    id="registerTab"
+                    onclick="showRegister()"
+                    type="button"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 LOGIN
+            ========================= -->
+
+            <form
+                class="form active"
+                id="loginForm"
+                onsubmit="login(event)"
+            >
+
+                <div class="field">
+
+                    <label for="loginUsername">
+                        Username or Email
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Enter your username or email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    id="loginButton"
+                    class="submit"
+                    type="submit"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- =========================
+                 REGISTER
+            ========================= -->
+
+            <form
+                class="form"
+                id="registerForm"
+                onsubmit="register(event)"
+            >
+
+                <div class="field">
+
+                    <label for="username">
+                        Furback Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Choose a username"
+                        minlength="3"
+                        maxlength="24"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        minlength="7"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="requirements">
+
+                    <strong>Password requirements</strong>
+
+                    <br>
+
+                    • At least 7 characters
+
+                    <br>
+
+                    • Use a mixture of letters, numbers, and symbols
+                    when possible
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Enter your password again"
+                        minlength="7"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    id="registerButton"
+                    class="submit"
+                    type="submit"
+                >
+                    Create Furback User
+                </button>
+
+            </form>
+
+
+            <!-- =========================
+                 DISCORD
+            ========================= -->
+
+            <div class="divider">
+                OR
+            </div>
+
+            <button
+                id="discordButton"
+                class="discord"
+                onclick="discordLogin()"
+                type="button"
+            >
+                Continue with Discord
+            </button>
+
+
+            <div class="notice">
+
+                Discord can be connected to your
+                Furback User account after registration.
+
+            </div>
+
+
+            <a
+                href="index.html"
+                class="back"
+            >
+                ← Back to Furback Org
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const statusBox =
+    document.getElementById("status");
+
+const welcomeScreen =
+    document.getElementById("welcomeScreen");
+
+const authContent =
+    document.getElementById("authContent");
+
+const rememberedUsername =
+    document.getElementById("rememberedUsername");
+
+const rememberedStatus =
+    document.getElementById("rememberedStatus");
+
+const continueButton =
+    document.getElementById("continueButton");
+
+const forgetButton =
+    document.getElementById("forgetButton");
+
+
+/* =========================================================
+   STATUS HELPERS
+========================================================= */
+
+function showStatus(message, type = "error") {
+
+    statusBox.textContent = message;
+
+    statusBox.className =
+        "status show " + type;
+}
+
+
+function hideStatus() {
+
+    statusBox.textContent = "";
+
+    statusBox.className = "status";
+
+}
+
+
+function showRememberedStatus(message, type = "error") {
+
+    rememberedStatus.textContent = message;
+
+    rememberedStatus.className =
+        "status show " + type;
+}
+
+
+function hideRememberedStatus() {
+
+    rememberedStatus.textContent = "";
+
+    rememberedStatus.className = "status";
+
+}
+
+
+/* =========================================================
+   SWITCH TO LOGIN
+========================================================= */
+
+function showLogin() {
+
+    hideStatus();
+
+    document
+        .getElementById("loginForm")
+        .classList.add("active");
+
+    document
+        .getElementById("registerForm")
+        .classList.remove("active");
+
+    document
+        .getElementById("loginTab")
+        .classList.add("active");
+
+    document
+        .getElementById("registerTab")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   SWITCH TO REGISTER
+========================================================= */
+
+function showRegister() {
+
+    hideStatus();
+
+    document
+        .getElementById("registerForm")
+        .classList.add("active");
+
+    document
+        .getElementById("loginForm")
+        .classList.remove("active");
+
+    document
+        .getElementById("registerTab")
+        .classList.add("active");
+
+    document
+        .getElementById("loginTab")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   CHECK REMEMBERED DEVICE
+========================================================= */
+
+async function checkRememberedAccount() {
+
+    try {
+
+        const response =
+            await fetch("/api/device-account", {
+                method: "GET",
+                credentials: "include"
+            });
+
+        const data =
+            await response.json();
+
+        if (
+            response.ok &&
+            data &&
+            data.remembered &&
+            data.user
+        ) {
+
+            rememberedUsername.textContent =
+                data.user.username;
+
+            authContent.classList.add("hidden");
+
+            welcomeScreen.classList.add("active");
+
+            hideRememberedStatus();
+
+            return;
+        }
+
+        welcomeScreen.classList.remove("active");
+
+        authContent.classList.remove("hidden");
+
+    } catch (error) {
+
+        console.error(
+            "Device account check failed:",
+            error
+        );
+
+        welcomeScreen.classList.remove("active");
+
+        authContent.classList.remove("hidden");
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTINUE AS REMEMBERED USER
+========================================================= */
+
+async function continueAsRememberedUser() {
+
+    hideRememberedStatus();
+
+    continueButton.disabled = true;
+
+    continueButton.textContent =
+        "Signing in...";
+
+    try {
+
+        const response =
+            await fetch("/api/device/continue", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({})
+            });
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to continue with this account."
+            );
+
+        }
+
+        continueButton.textContent =
+            "Success!";
+
+        window.location.href =
+            "/index.html";
+
+    } catch (error) {
+
+        console.error(
+            "Remembered login failed:",
+            error
+        );
+
+        showRememberedStatus(
+            error.message ||
+            "Unable to continue with this account.",
+            "error"
+        );
+
+        continueButton.disabled = false;
+
+        continueButton.textContent =
+            "Continue";
+
+    }
+
+}
+
+
+/* =========================================================
+   USE DIFFERENT ACCOUNT
+========================================================= */
+
+function useDifferentAccount() {
+
+    hideRememberedStatus();
+
+    welcomeScreen.classList.remove("active");
+
+    authContent.classList.remove("hidden");
+
+    showLogin();
+
+}
+
+
+/* =========================================================
+   FORGET THIS DEVICE
+========================================================= */
+
+async function forgetThisDevice() {
+
+    hideRememberedStatus();
+
+    forgetButton.disabled = true;
+
+    forgetButton.textContent =
+        "Removing...";
+
+    try {
+
+        const response =
+            await fetch("/api/device/forget", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({})
+            });
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to remove this account."
+            );
+
+        }
+
+        welcomeScreen.classList.remove("active");
+
+        authContent.classList.remove("hidden");
+
+        showLogin();
+
+        showStatus(
+            "This account has been removed from this device.",
+            "success"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Forget device failed:",
+            error
+        );
+
+        showRememberedStatus(
+            error.message ||
+            "Unable to remove this account.",
+            "error"
+        );
+
+        forgetButton.disabled = false;
+
+        forgetButton.textContent =
+            "Remove this account from this device";
+
+    }
+
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+async function register(event) {
+
+    event.preventDefault();
+
+    hideStatus();
+
+    const username =
+        document
+            .getElementById("username")
+            .value
+            .trim();
+
+    const email =
+        document
+            .getElementById("email")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+    const confirmPassword =
+        document
+            .getElementById("confirmPassword")
+            .value;
+
+    const button =
+        document.getElementById("registerButton");
+
+
+    /* =========================
+       CLIENT VALIDATION
+    ========================= */
+
+    if (password.length < 7) {
+
+        showStatus(
+            "Your password must be at least 7 characters long.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (password !== confirmPassword) {
+
+        showStatus(
+            "The passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (username.length < 3) {
+
+        showStatus(
+            "Your username must be at least 3 characters long.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* =========================
+       SEND TO BACKEND
+    ========================= */
+
+    button.disabled = true;
+
+    button.textContent =
+        "Creating account...";
+
+    try {
+
+        const response =
+            await fetch("/api/register", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                credentials: "include",
+
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password
+                })
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to create your account."
+            );
+
+        }
+
+
+        button.textContent =
+            "Account created!";
+
+
+        /*
+            The backend creates the session
+            and remembered-device token.
+        */
+
+        window.location.href =
+            "/dashboard.html";
+
+
+    } catch (error) {
+
+        console.error(
+            "Registration failed:",
+            error
+        );
+
+        showStatus(
+            error.message ||
+            "Unable to create your account.",
+            "error"
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "Create Furback User";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(event) {
+
+    event.preventDefault();
+
+    hideStatus();
+
+    const identifier =
+        document
+            .getElementById("loginUsername")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+    const button =
+        document.getElementById("loginButton");
+
+
+    if (!identifier) {
+
+        showStatus(
+            "Enter your username or email.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!password) {
+
+        showStatus(
+            "Enter your password.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Logging in...";
+
+
+    try {
+
+        const response =
+            await fetch("/api/login", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                credentials: "include",
+
+                body: JSON.stringify({
+                    identifier,
+                    password
+                })
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Invalid username/email or password."
+            );
+
+        }
+
+
+        button.textContent =
+            "Success!";
+
+
+        /*
+            Do not store the password.
+
+            The backend owns the session and
+            remembered-device cookie.
+        */
+
+        window.location.href =
+            "/dashboard.html";
+
+
+    } catch (error) {
+
+        console.error(
+            "Login failed:",
+            error
+        );
+
+        showStatus(
+            error.message ||
+            "Unable to log in.",
+            "error"
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "Login";
+
+    }
+
+}
+
+
+/* =========================================================
+   DISCORD LOGIN
+========================================================= */
+
+function discordLogin() {
+
+    const button =
+        document.getElementById("discordButton");
+
+    button.disabled = true;
+
+    button.textContent =
+        "Connecting to Discord...";
+
+
+    /*
+        The backend handles the actual
+        Discord OAuth2 process.
+    */
+
+    window.location.href =
+        "/auth/discord";
+
+}
+
+
+/* =========================================================
+   HANDLE DISCORD RETURN
+========================================================= */
+
+function handleDiscordMessage() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const discord =
+        params.get("discord");
+
+
+    if (discord === "1") {
+
+        showStatus(
+            "Your Discord account is not connected yet. Create or log into a Furback User account first, then connect Discord from your dashboard.",
+            "error"
+        );
+
+        showLogin();
+
+    }
+
+}
+
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        handleDiscordMessage();
+
+        await checkRememberedAccount();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
